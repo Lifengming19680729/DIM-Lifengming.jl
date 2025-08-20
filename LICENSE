@@ -1,0 +1,14 @@
+using DynamicIntervals
+
+a = DInt(2.0, 0.1)  # 2.0 ± 0.1
+b = DInt(3.0, 0.2)  # 3.0 ± 0.2
+
+c = a + b  # 5.0 ± 0.3
+d = a * b  # 6.0 ± 0.7
+using DynamicIntervals
+
+a = DInt(2.0, 0.1)  # 2.0 ± 0.1
+b = DInt(3.0, 0.2)  # 3.0 ± 0.2
+
+c = a + b  # 5.0 ± 0.3
+d = a * b  # 6.0 ± 0.7
