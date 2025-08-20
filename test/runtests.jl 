@@ -1,0 +1,43 @@
+using Test
+using DynamicIntervals
+
+# 测试1：动态区间基本构造
+let
+    a = DInt(2.0, -0.1, 0.1)
+    @test a.b == [2.0]
+    @test a.δm == [-0.1]
+    @test a.δp == [0.1]
+end
+
+# 测试2：加法运算
+let
+    a = DInt(1.0, -0.2, 0.3)
+    b = DInt(2.0, -0.1, 0.4)
+    c = a + b
+    @test c.b == [3.0]
+    @test c.δm == [-0.3]
+    @test c.δp == [0.7]
+end
+
+# 测试3：乘法运算
+let
+    a = DInt(2.0, -0.1, 0.1)  # [1.9, 2.1]
+    b = DInt(3.0, -0.2, 0.2)  # [2.8, 3.2]
+    c = a * b
+    @test c.b ≈ [6.0]
+    @test c.δm ≈ 2.0*(-0.2) + 3.0*(-0.1)  # -0.4 -0.3 = -0.7
+    @test c.δp ≈ 2.0*(0.2) + 3.0*(0.1)   # 0.4 + 0.3 = 0.7
+end
+
+# 测试4：多乐定理
+let
+    n0 = DInt(0.0, -0.5, 0.5)  # 初始区间
+    n = DInt(1.0, -0.3, 0.3)   # t时刻区间
+    L = 0.1
+    t = 1.0
+    t0 = 0.0
+    bound = duole_theorem(n, L, t, n0, t0)
+    @test bound > 0  # 误差界为正数
+end
+
+println("所有测试通过！")
