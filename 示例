@@ -1,0 +1,13 @@
+using DynamicIntervals
+
+# 创建动态区间
+a = DInt(2.0, -0.1, 0.1)  # 中心值2.0，下界-0.1，上界0.1
+b = DInt(3.0, -0.2, 0.2)
+
+# 加法
+c = a + b
+println("a + b = $(c.b) ± ($(abs(c.δm[1])), $(c.δp[1]))")
+
+# 乘法
+d = a * b
+println("a * b = $(d.b) ± ($(abs(d.δm[1])), $(d.δp[1]))")
